@@ -42,7 +42,7 @@ export default function Sidebar() {
         <div className="sidebarContainer">
             <div className="sidebarWrapper">
                 <SidebarItemList sidebarItmesArray={sidebarItmesArray} />
-                <SidebarFriendsList key={Users.id} friendsArray={Users} PF={PF} />
+                <SidebarFriendsList friendsArray={Users} PF={PF} />
             </div>
         </div>
     )
@@ -55,8 +55,8 @@ function SidebarItemList({ sidebarItmesArray }) {
     return (
         <ul className="sidebarItmesList">
             {
-                Array.from([...sidebarItmesArray], (item) => (
-                    <li className="sidebarItems">
+                Array.from([...sidebarItmesArray], (item, index) => (
+                    <li key={index} className="sidebarItems">
                         {item.icon}
                         <span className="itemText">{item.text}</span>
                     </li>
@@ -74,7 +74,7 @@ export function SidebarFriendsList({ friendsArray, PF }) {
         <ul className="sidebarItmesList">
             {
                 Array.from([...friendsArray], (user) => (
-                    <li className="sidebarItems">
+                    <li key={user.id} className="sidebarItems">
                         <img src={PF + user.profilePicture} alt="" className="profileImage" />
                         <span className="itemText">{user.username}</span>
                     </li>

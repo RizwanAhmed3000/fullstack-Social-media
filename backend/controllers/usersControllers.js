@@ -54,8 +54,10 @@ export const deleteUser = async (req, res) => {
 // Get A user
 
 export const getUser = async (req, res) => {
+    const userId = req.query.userId;
+    const userName = req.query.userName;
     try {
-        const user = await User.findById(req.params.id)
+        const user = userId ? await User.findById(userId) : await User.findOne({userName: userName})
         res.status(200).send({
             status: 'Success',
             mesage: 'User found',

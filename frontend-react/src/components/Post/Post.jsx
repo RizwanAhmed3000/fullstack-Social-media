@@ -1,8 +1,9 @@
 import "./Post.css"
-import { ThumbUp, Favorite } from "@mui/icons-material"
+import { ThumbUp } from "@mui/icons-material"
 import { useEffect, useState } from "react"
-import { Users } from "../../dummyData.js"
 import axios from "axios";
+import { format } from "timeago.js";
+import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
     // console.log(post, "==> in comp");
@@ -10,16 +11,16 @@ export default function Post({ post }) {
     const [isLikeTrue, setIsLikeTrue] = useState(false)
     const [user, setUser] = useState({})
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
+    // console.log(post, "==> post ");
     useEffect(() => {
         const fetchUser = async () => {
-            const res = await axios.get(`user/${post.userId}`);
+            const res = await axios.get(`http://localhost:8000/user?userId=${post.userId}`);
             const data = res.data.userDeatils
-            console.log(data);
+            // console.log(data);
             setUser(data)
         }
         fetchUser()
-    }, [])
+    }, [post.userId])
 
     function likeHandler() {
         if (!isLikeTrue) {
@@ -36,11 +37,13 @@ export default function Post({ post }) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="authDeatil">
-                        <img src={PF + user?.profilePicture} alt="" className="profileImage" />
-                        <span className="userName">{
-                            user?.userName
-                        }</span>
-                        <span className="timeAgo">{post?.createdAt}</span>
+                        <Link to={`http://localhost:3000/profile/${user.userName}`} style={{ textDecoration: "none", color: "white", display: "flex", alignItems: "center" }}>
+                            <img src={PF + user.profilePicture || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt="" className="profileImage" />
+                            <span className="userName">{
+                                user?.userName
+                            }</span>
+                        </Link>
+                        <span className="timeAgo">{format(post.createdAt)}</span>
                     </div>
                 </div>
                 <div className="postMid">

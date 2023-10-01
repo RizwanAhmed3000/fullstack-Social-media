@@ -123,3 +123,20 @@ export const getTimeline = async (req, res) => {
         })
     }
 }
+
+
+export const getUserPost = async (req, res) => {
+    try {
+        const user = await User.findOne({ userName: req.params.username });
+        const posts = await Post.find({ userId: user._id })
+        res.status(200).send({
+            status: 'Success',
+            data: posts
+        })
+    } catch (error) {
+        res.status(500).send({
+            status: 'Failed',
+            message: error.message
+        })
+    }
+}

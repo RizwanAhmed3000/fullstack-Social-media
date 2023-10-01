@@ -9,7 +9,7 @@ export default function OnlineFriendList({ onlineFriendsArray }) {
             <ul className="sidebarItmesList">
                 {
                     Array.from([...onlineFriendsArray], (user) => (
-                        <li className="sidebarItems">
+                        <li key={user.id} className="sidebarItems">
                             <div className="profileImgContainer">
                                 <img src={PF+user.profilePicture} alt="" className="profileImage" />
                                 <span className="online"></span>
