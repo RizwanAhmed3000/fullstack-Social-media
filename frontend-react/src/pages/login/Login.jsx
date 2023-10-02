@@ -1,17 +1,22 @@
 import { useRef } from "react";
 import "./login.css"
+import { loginCall } from "../../apiCalls.js";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Login() {
 
     const email = useRef();
     const password = useRef();
+    const { user, isFetching, error, dispatch } = useContext(AuthContext)
 
     function loginHandler(e) {
-        e.preventDefault()
-        console.log("loginHandler working");
-        console.log(email.current.value);
-        // console.log(password.current.value);
+        e.preventDefault();
+        loginCall({ email: email.current.value, password: password.current.value }, dispatch);
     }
+
+    console.log(user);
 
     return (
         <div className="login">
@@ -30,7 +35,7 @@ export default function Login() {
                             <input type="password" class="form__field" placeholder="Email" required minLength={8} ref={password} />
                             <label for="name" class="form__label">Password</label>
                         </div>
-                        <button className="loginBtn seeMoreBtn" >Log in</button>
+                        <button className="loginBtn seeMoreBtn" >{isFetching ? <CircularProgress style={{ color: "black" }} size="18px"/> : "Log in"}</button>
                         <span className="forgetPassword">Forget password</span>
                         <button className="signupBtn seeMoreBtn">Create new account</button>
                     </form>

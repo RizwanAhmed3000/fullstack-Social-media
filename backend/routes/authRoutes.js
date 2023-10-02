@@ -11,6 +11,6 @@ authRoutes.get('/', (req , res)=>{
     res.status(200).send('this is authentication route')
 });
 authRoutes.post('/signUp', signUp);
-authRoutes.post('/logIn', logIn);
+authRoutes.post('/login', logIn);
 
 export default authRoutes;
