@@ -35,11 +35,11 @@ app.use('/user', usersRoutes);
 app.use('/auth', authRoutes);
 app.use('/posts', postsRoutes);
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.send('Welcome to the server')
 })
 
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
     console.log("listening to the server");
     connect()
 })
