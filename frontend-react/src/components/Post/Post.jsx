@@ -4,14 +4,22 @@ import { useEffect, useState } from "react"
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Post({ post }) {
     // console.log(post, "==> in comp");
     const [likeCount, setLikeCount] = useState(post.likes.length)
     const [isLikeTrue, setIsLikeTrue] = useState(false)
     const [user, setUser] = useState({})
+    const { user: currentUser } = useContext(AuthContext);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     // console.log(post, "==> post ");
+
+    useEffect(() => {
+        setIsLikeTrue(post.likes.includes(currentUser._id))
+    }, [currentUser._id, post.likes])
+
     useEffect(() => {
         const fetchUser = async () => {
             const res = await axios.get(`http://localhost:8000/user?userId=${post.userId}`);
@@ -23,6 +31,13 @@ export default function Post({ post }) {
     }, [post.userId])
 
     function likeHandler() {
+
+        try {
+            axios.put(`http://localhost:8000/posts/${post._id}/like`, { userId: currentUser._id })
+        } catch (error) {
+            console.log(error);
+        }
+
         if (!isLikeTrue) {
             setLikeCount((c) => c + 1)
             setIsLikeTrue(true)
@@ -38,7 +53,7 @@ export default function Post({ post }) {
                 <div className="postTop">
                     <div className="authDeatil">
                         <Link to={`http://localhost:3000/profile/${user.userName}`} style={{ textDecoration: "none", color: "white", display: "flex", alignItems: "center" }}>
-                            <img src={PF + user.profilePicture || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt="" className="profileImage" />
+                            <img src={user.profilePicture ? PF + user.profilePicture : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt="" className="profileImage" />
                             <span className="userName">{
                                 user?.userName
                             }</span>
