@@ -1,5 +1,5 @@
-import express  from "express";
-import { getUsers, updateUser, deleteUser, getUser, followUser, unfollowUser } from "../controllers/usersControllers.js";
+import express from "express";
+import { getUsers, updateUser, deleteUser, getUser, followUser, unfollowUser, getFriendList } from "../controllers/usersControllers.js";
 
 const usersRoutes = express.Router();
 
@@ -17,4 +17,8 @@ usersRoutes.put('/:id/follow', followUser)
 
 // unfollow user
 usersRoutes.put('/:id/unfollow', unfollowUser)
+
+//get friends list
+usersRoutes.get('/friends/:userId', getFriendList)
+
 export default usersRoutes;
