@@ -8,7 +8,7 @@ export default function Topbar() {
 
     const { user } = useContext(AuthContext);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-    console.log(user);
+    // console.log(user, "===>>> topbars");
 
     return (
         <div className="topbarContainer">
@@ -41,7 +41,7 @@ export default function Topbar() {
                     </div>
                 </div>
                 <Link to={`/profile/${user?.loggedInUser?.userName}`}>
-                    <img src={user?.loggedInUser?.profilePicture ? PF + user?.loggedInUser?.profilePicture : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt="" className="profileImg" />
+                    <img src={user?.profilePicture ? PF + user?.profilePicture : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt="" className="profileImg" />
                 </Link>
             </div>
         </div>

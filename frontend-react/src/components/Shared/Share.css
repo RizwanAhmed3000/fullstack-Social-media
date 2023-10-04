@@ -1,7 +1,7 @@
 .shareBox {
     background-color: #282828;
     border-radius: 15px;
-    margin-bottom: 10px ;
+    margin-bottom: 10px;
 }
 
 .shareWrapper {
@@ -42,7 +42,8 @@
     justify-content: space-around;
 }
 
-.shareOtionBtn, .postBtn {
+.shareOtionBtn,
+.postBtn {
     background-color: transparent;
     color: white;
     padding: 3px 5px;
@@ -54,16 +55,18 @@
     transition: all 250ms ease;
 }
 
-.shareOtionBtn:hover, .postBtn:hover{
+.shareOtionBtn:hover,
+.postBtn:hover {
     background-color: #fdfb00;
     color: #282828;
 }
 
-.shareIcons{
-    margin-right: 5px;;
+.shareIcons {
+    margin-right: 5px;
+    ;
 }
 
-.postBtn{
-    border: none;
+.postBtn {
+    border: 2px solid #fdfb00;
     font-size: inherit;
 }

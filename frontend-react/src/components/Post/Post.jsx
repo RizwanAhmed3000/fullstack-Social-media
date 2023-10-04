@@ -65,7 +65,7 @@ export default function Post({ post }) {
                     <div >
                         <p className="postText">{post?.postDescription}</p>
                         <div className="postImgContainer">
-                            <img src={PF + post?.postImage} alt="" className="postImg" />
+                            <img src={post?.postImage || PF + post?.postImage} alt="" className="postImg" />
                         </div>
                     </div>
                 </div>
