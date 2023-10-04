@@ -9,6 +9,7 @@ export default function Feed({ username }) {
     // console.log(username, "==> username");
 
     const [posts, setPosts] = useState([]);
+    const [checkNewPost, setCheckNewPost] = useState(false)
     const { user } = useContext(AuthContext);
     // console.log(user);
 
@@ -22,11 +23,11 @@ export default function Feed({ username }) {
             }))
         }
         fetchPost()
-    }, [username, user._id])
+    }, [username, user._id, checkNewPost])
     return (
         <div className="feedContainer">
             <div className="feedWrapper">
-                <Share />
+                <Share setCheckNewPost={setCheckNewPost}/>
                 {
                     posts.map((post) => (
                         <Post key={post._id} post={post} />

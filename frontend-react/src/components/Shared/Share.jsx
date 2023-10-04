@@ -7,7 +7,7 @@ import { useState } from "react"
 import axios from "axios"
 import { storage, ref, uploadBytesResumable, getDownloadURL } from "../../firebaseConfig.js"
 
-export default function Share() {
+export default function Share({ setCheckNewPost }) {
     const { user } = useContext(AuthContext)
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const description = useRef();
@@ -17,8 +17,9 @@ export default function Share() {
 
     async function postHandler(e) {
         e.preventDefault();
-
-        if (file) {
+        if (!description.current.value && !file) {
+            alert('There is nothing to upload')
+        } else if (file) {
             /** @type {any} */
             const metadata = {
                 contentType: 'image/jpg'
@@ -65,7 +66,7 @@ export default function Share() {
                         }
                         try {
                             await axios.post('http://localhost:8000/posts/', newPost)
-                            window.location.reload()
+                            setCheckNewPost(true)
                         } catch (error) {
                             console.error(error)
                         }
@@ -79,7 +80,7 @@ export default function Share() {
             }
             try {
                 await axios.post('http://localhost:8000/posts/', newPost)
-                window.location.reload()
+                setCheckNewPost(true)
             } catch (error) {
                 console.error(error)
             }

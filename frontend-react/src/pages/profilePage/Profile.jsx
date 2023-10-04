@@ -28,7 +28,7 @@ export default function Profile() {
                 <div className="profileCardContainer">
                     <div className="profileCardWrapper">
                         <div className="profileImgs">
-                            <img src={user.coverPic || `${PF}post/3.jpg`} alt="" className="profileCoverImg" />
+                            <img src={user?.coverPic || `${PF}post/3.jpg`} alt="" className="profileCoverImg" />
                             <img src={`${PF}${user.profilePicture}`} alt="" className="profileUserImg" />
                         </div>
                         <div className="profileInfo">
