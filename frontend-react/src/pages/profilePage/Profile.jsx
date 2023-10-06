@@ -15,11 +15,13 @@ export default function Profile() {
         const fetchUser = async () => {
             const res = await axios.get(`http://localhost:8000/user?userName=${username}`);
             const data = res.data.userDeatils
-            // console.log(data, "==>user details");
+            console.log(data, "==>user details");
             setUser(data)
         }
         fetchUser()
     }, [username])
+
+    console.log(user, "==> user in profile");
 
     return (
         <>

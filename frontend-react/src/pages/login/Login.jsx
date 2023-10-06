@@ -11,7 +11,7 @@ export default function Login() {
     const email = useRef();
     const password = useRef();
     const navigate = useNavigate()
-    const { user, isFetching, error, dispatch } = useContext(AuthContext)
+    const { isFetching, dispatch } = useContext(AuthContext)
 
     function loginHandler(e) {
         e.preventDefault();
@@ -19,7 +19,7 @@ export default function Login() {
         navigate('/')
     }
 
-    console.log(user);
+    // console.log(user);
 
     return (
         <div className="login">

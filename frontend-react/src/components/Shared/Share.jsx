@@ -1,5 +1,5 @@
 import "./Share.css"
-import { PermMedia, LocationOn, Tag, TagFaces } from "@mui/icons-material"
+import { PermMedia, LocationOn, Tag, TagFaces, Cancel } from "@mui/icons-material"
 import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext.js"
 import { useRef } from "react"
@@ -13,7 +13,7 @@ export default function Share({ setCheckNewPost }) {
     const description = useRef();
     const [file, setFile] = useState(null);
     // const [imgUrl, setImgUrl] = useState("")
-
+    console.log(user, "==> user");
 
     async function postHandler(e) {
         e.preventDefault();
@@ -70,6 +70,8 @@ export default function Share({ setCheckNewPost }) {
                         } catch (error) {
                             console.error(error)
                         }
+                        description.current.value = ""
+                        setFile(null)
                     });
                 }
             );
@@ -84,6 +86,7 @@ export default function Share({ setCheckNewPost }) {
             } catch (error) {
                 console.error(error)
             }
+            description.current.value = ""
         }
     }
 
@@ -92,9 +95,17 @@ export default function Share({ setCheckNewPost }) {
         <div className="shareBox">
             <div className="shareWrapper">
                 <div className="shareTop">
-                    <img src={user?.profilePicture ? PF + user.profilePicture : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt="" className="shareProfileImage" />
+                    <img src={user?.loggedInUser?.profilePicture ? PF + user?.loggedInUser?.profilePicture : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt="" className="shareProfileImage" />
                     <input type="text" className="postInputText" ref={description} placeholder="What's in your mind?" />
                 </div>
+                {
+                    file && (
+                        <div className="shareImgPreview">
+                            <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
+                            <Cancel className="cancelBtn" onClick={() => setFile(null)} />
+                        </div>
+                    )
+                }
                 <form className="shareBottom" onSubmit={postHandler}>
                     <div className="shareOptions">
                         <label htmlFor="file" className="shareOption">

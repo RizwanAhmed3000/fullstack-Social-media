@@ -74,9 +74,9 @@ export function SidebarFriendsList({ friendsArray, PF }) {
         <ul className="sidebarItmesList">
             {
                 Array.from([...friendsArray], (user) => (
-                    <li key={user.id} className="sidebarItems">
-                        <img src={PF + user.profilePicture} alt="" className="profileImage" />
-                        <span className="itemText">{user.username}</span>
+                    <li key={user?.id} className="sidebarItems">
+                        <img src={PF + user?.profilePicture} alt="" className="profileImage" />
+                        <span className="itemText">{user?.username}</span>
                     </li>
                 ))
             }

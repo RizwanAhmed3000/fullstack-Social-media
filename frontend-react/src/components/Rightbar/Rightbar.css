@@ -85,3 +85,12 @@
     border-radius: 5px;
     object-fit: cover;
 }
+
+.followBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}

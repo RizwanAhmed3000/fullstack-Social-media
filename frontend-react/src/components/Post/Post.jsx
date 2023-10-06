@@ -17,8 +17,8 @@ export default function Post({ post }) {
     // console.log(post, "==> post ");
 
     useEffect(() => {
-        setIsLikeTrue(post.likes.includes(currentUser._id))
-    }, [currentUser._id, post.likes])
+        setIsLikeTrue(post.likes.includes(currentUser?.loggedInUser?._id))
+    }, [currentUser?.loggedInUser?._id, post.likes])
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -28,12 +28,12 @@ export default function Post({ post }) {
             setUser(data)
         }
         fetchUser()
-    }, [post.userId])
+    }, [post?.userId])
 
     function likeHandler() {
 
         try {
-            axios.put(`http://localhost:8000/posts/${post._id}/like`, { userId: currentUser._id })
+            axios.put(`http://localhost:8000/posts/${post._id}/like`, { userId: currentUser?.loggedInUser?._id })
         } catch (error) {
             console.log(error);
         }

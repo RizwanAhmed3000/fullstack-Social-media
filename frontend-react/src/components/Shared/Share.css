@@ -70,3 +70,26 @@
     border: 2px solid #fdfb00;
     font-size: inherit;
 }
+
+.shareImgPreview{
+    width: 100%;
+    padding: 10px;
+    position: relative;
+}
+
+.shareImg{
+    width: 100%;
+    object-fit: cover;
+}
+
+.cancelBtn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    transition: all 250ms ease;
+}
+
+.cancelBtn:hover{
+    filter: invert(100%);
+}

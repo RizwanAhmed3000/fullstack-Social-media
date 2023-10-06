@@ -15,7 +15,7 @@ export default function Feed({ username }) {
 
     useEffect(() => {
         const fetchPost = async () => {
-            const res = username ? await axios.get(`http://localhost:8000/posts/profile/${username}`) : await axios.get(`http://localhost:8000/posts/timeline/${user._id}`);
+            const res = username ? await axios.get(`http://localhost:8000/posts/profile/${username}`) : await axios.get(`http://localhost:8000/posts/timeline/${user?.loggedInUser?._id}`);
             const data = res.data.data
             // console.log(data);
             setPosts(data.sort((p1, p2) => {
@@ -23,11 +23,11 @@ export default function Feed({ username }) {
             }))
         }
         fetchPost()
-    }, [username, user._id, checkNewPost])
+    }, [username, user?.loggedInUser?._id, checkNewPost])
     return (
         <div className="feedContainer">
             <div className="feedWrapper">
-                <Share setCheckNewPost={setCheckNewPost}/>
+                {username === user?.loggedInUser?.userName ? <Share setCheckNewPost={setCheckNewPost} /> : !username ? <Share setCheckNewPost={setCheckNewPost} /> : ""}
                 {
                     posts.map((post) => (
                         <Post key={post._id} post={post} />
