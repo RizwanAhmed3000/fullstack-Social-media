@@ -34,7 +34,7 @@ export default function Rightbar({ profile }) {
 
     useEffect(() => {
         setIsFollowing(currentUser?.loggedInUser?.followings?.includes(profile?._id))
-    }, [currentUser, profile?._id])
+    }, [currentUser?.loggedInUser?.followings, profile?._id])
 
     async function followHandler() {
         try {

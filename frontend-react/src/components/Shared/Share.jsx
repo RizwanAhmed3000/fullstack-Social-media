@@ -13,7 +13,7 @@ export default function Share({ setCheckNewPost }) {
     const description = useRef();
     const [file, setFile] = useState(null);
     // const [imgUrl, setImgUrl] = useState("")
-    console.log(user, "==> user");
+    // console.log(user, "==> user");
 
     async function postHandler(e) {
         e.preventDefault();
@@ -60,7 +60,7 @@ export default function Share({ setCheckNewPost }) {
                     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
                         console.log('File available at', downloadURL);
                         const newPost = {
-                            userId: user._id,
+                            userId: user?.loggedInUser?._id,
                             postDescription: description.current.value,
                             postImage: downloadURL || ""
                         }
@@ -77,7 +77,7 @@ export default function Share({ setCheckNewPost }) {
             );
         } else {
             const newPost = {
-                userId: user._id,
+                userId: user?.loggedInUser?._id,
                 postDescription: description.current.value,
             }
             try {
